@@ -22,7 +22,12 @@ public class QuestManager : MonoBehaviour
     public void CompleteQuest(string id)
     {
         Quest q = GetQuest(id);
-        if(q == null || q.isCompleted) return;
+        if(q == null)
+        {
+            Debug.LogWarning("CompleteQuest: chưa nhận quest '" + id + "' nên không hoàn thành được");
+            return;
+        }
+        if(q.isCompleted) return;
         q.isCompleted = true;
         q.isActive = false;
         QuestUI.Instance.ShowQuestComplete(q.questName);

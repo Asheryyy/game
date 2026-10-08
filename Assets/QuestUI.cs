@@ -25,6 +25,12 @@ public class QuestUI : MonoBehaviour
         questNotificationPanel.SetActive(true);
         StartCoroutine(HideQuestNotification());
     }
+    // Cập nhật chữ thông báo liên tục (vd: tiến độ "Đang quét... 60%") mà không tạo thêm hẹn giờ ẩn
+    public void SetNotificationText(string message)
+    {
+        questNotificationText.text = message;
+        questNotificationPanel.SetActive(true);
+    }
     // Hàm nhận quest — thêm prefix
     public void ShowQuestNotification(string questName)
     {
@@ -43,8 +49,11 @@ public class QuestUI : MonoBehaviour
     public void UpdateUI()
     {
         Quest activeQuest = null;
-        foreach(Quest q in QuestManager.Instance.GetActiveQuests())
+        // Hiện quest MỚI NHẤT chưa xong (quest cũ lỡ chưa hoàn thành cũng không che quest mới)
+        var quests = QuestManager.Instance.GetActiveQuests();
+        for(int i = quests.Count - 1; i >= 0; i--)
         {
+            Quest q = quests[i];
             if(q.isActive && !q.isCompleted)
             {
                 activeQuest = q;

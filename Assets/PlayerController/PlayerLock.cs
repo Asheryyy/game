@@ -28,4 +28,10 @@ public class PlayerLock : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation,-90,90);
         transform.localRotation = Quaternion.Euler(-xRotation,0,0);
     }
+
+    void OnDestroy()
+    {
+        m_Player.Disable();
+        m_Actions?.Dispose();
+    }
 }

@@ -41,7 +41,7 @@ public class DialogueManager : MonoBehaviour
         IsActive = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        if(pendingQuest != null && !string.IsNullOrEmpty(pendingQuest.questId))
+        if(pendingQuest != null && !string.IsNullOrEmpty(pendingQuest.questId) && QuestManager.Instance != null)
         {
             QuestManager.Instance.StartQuest(pendingQuest);
             pendingQuest = null;
