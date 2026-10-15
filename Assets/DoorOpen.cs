@@ -8,7 +8,7 @@ using System.Collections;
 /// Gắn vào 1 object có Box Collider (Is Trigger) đặt TRƯỚC cửa.
 /// Cánh cửa (vd: small_door) phải là CON của 1 object "BanLe" đặt đúng mép bản lề → script xoay BanLe.
 /// </summary>
-public class DoorOpen : MonoBehaviour
+public class DoorOpen : MonoBehaviour, ISaveable
 {
     [Tooltip("Object bản lề (cha của cánh cửa), đặt ở mép cửa phía có bản lề")]
     [SerializeField] private Transform hinge;
@@ -40,6 +40,29 @@ public class DoorOpen : MonoBehaviour
     {
         Collider col = GetComponent<Collider>();
         if (col != null) col.isTrigger = true;
+    }
+
+    public string CaptureState() =>
+        (opened ? "1" : "0") + ";" + (hinge != null ? SaveSystem.Rot(hinge.localRotation) : "") +
+        ";" + (secondHinge != null ? SaveSystem.Rot(secondHinge.localRotation) : "");
+    public void RestoreState(string s)
+    {
+        string[] p = s.Split(';');
+        opened = p[0] == "1";
+        if (hinge != null && p.Length > 1 && p[1].Length > 0) hinge.localRotation = SaveSystem.ParseRot(p[1]);
+        if (secondHinge != null && p.Length > 2 && p[2].Length > 0) secondHinge.localRotation = SaveSystem.ParseRot(p[2]);
+        if (opened) DisableLeafColliders();
+    }
+
+    // Cửa đã mở → tắt collider cánh cửa để không chắn lối đi (lúc đóng vẫn chặn bình thường)
+    void DisableLeafColliders()
+    {
+        foreach (Transform h in new[] { hinge, secondHinge })
+        {
+            if (h == null) continue;
+            foreach (Collider c in h.GetComponentsInChildren<Collider>())
+                if (!c.isTrigger) c.enabled = false;
+        }
     }
 
     bool CanOpen()
@@ -93,6 +116,7 @@ public class DoorOpen : MonoBehaviour
 
         opened = true;
         opening = false;
+        DisableLeafColliders();
         if (!string.IsNullOrEmpty(questToComplete) && QuestManager.Instance != null)
             QuestManager.Instance.CompleteQuest(questToComplete);
         onOpened?.Invoke();

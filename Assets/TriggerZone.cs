@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Trigger : MonoBehaviour
+public class Trigger : MonoBehaviour, ISaveable
 {
     [SerializeField] private Quest questToGive;
     [SerializeField] private DialogueLine[] dialogueLines;
@@ -11,6 +11,8 @@ public class Trigger : MonoBehaviour
     [Tooltip("TRUE = chỉ nói chuyện 1 lần, đi ngang lần sau không nói lại")]
     [SerializeField] private bool playOnce = false;
     private bool hasPlayed = false;
+    public string CaptureState() => hasPlayed ? "1" : "0";
+    public void RestoreState(string s) => hasPlayed = s == "1";
     [Tooltip("Hoàn thành quest này ngay khi bắt đầu nói chuyện (vd: quest 'Hỏi đường cô 3')")]
     [SerializeField] private string questToCompleteOnTalk;
     [Tooltip("Bật các object này sau khi nói chuyện (vd: cái gương phát sáng cuối hành lang)")]

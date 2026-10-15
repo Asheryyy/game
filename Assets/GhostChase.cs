@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GhostChase : MonoBehaviour
+public class GhostChase : MonoBehaviour, ISaveable
 {
     [Header("=== PATROL / SCARE ===")]
     [Tooltip("Kéo Player vào đây (hoặc để trống, script tự tìm theo Tag 'Player')")]
@@ -43,6 +43,8 @@ public class GhostChase : MonoBehaviour
     // ──────────────────────────────────────────────
     NavMeshAgent agent;
     bool hasReacted    = false;
+    public string CaptureState() => hasReacted ? "1" : "0";
+    public void RestoreState(string s) => hasReacted = s == "1";
     bool patrolActive  = false;
     bool hasDashed     = false;
     bool isDashing     = false;

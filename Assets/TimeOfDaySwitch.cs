@@ -39,6 +39,15 @@ public class TimeOfDaySwitch : MonoBehaviour
 
     public static TimeOfDaySwitch Instance { get; private set; }
     public bool IsNight { get; private set; }
+    public enum Mode { Afternoon, Morning, Night }
+    public Mode Current { get; private set; }
+
+    public void SetMode(int m)
+    {
+        if (m == (int)Mode.Morning) SetMorning();
+        else if (m == (int)Mode.Night) SetNight();
+        else SetAfternoon();
+    }
 
     void Awake()
     {
@@ -46,14 +55,21 @@ public class TimeOfDaySwitch : MonoBehaviour
         if (startAtNight) SetNight(); else SetAfternoon();
     }
 
-    public void SetAfternoon() =>
+    public void SetAfternoon()
+    {
+        Current = Mode.Afternoon;
         Apply(false, afternoonSunRotation, afternoonSunColor, afternoonSunIntensity, afternoonAmbient, afternoonSkybox);
+    }
 
-    public void SetNight() =>
+    public void SetNight()
+    {
+        Current = Mode.Night;
         Apply(true, nightSunRotation, nightSunColor, nightSunIntensity, nightAmbient, nightSkybox);
+    }
 
     public void SetMorning()
     {
+        Current = Mode.Morning;
         Apply(false, morningSunRotation, morningSunColor, morningSunIntensity, morningAmbient, morningSkybox);
         foreach (GameObject go in afternoonObjects) if (go != null) go.SetActive(false);
         foreach (GameObject go in morningObjects)   if (go != null) go.SetActive(true);

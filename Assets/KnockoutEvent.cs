@@ -9,7 +9,7 @@ using System.Collections;
 /// → BỤP! màn hình đen ngay → chữ "Vài giờ sau..." → tỉnh dậy (đổi giờ, đồ vật biến mất...).
 /// Gắn vào 1 GameObject trống RIÊNG (luôn bật). Gọi Play() từ ClueItem → On Found.
 /// </summary>
-public class KnockoutEvent : MonoBehaviour
+public class KnockoutEvent : MonoBehaviour, ISaveable
 {
     [Header("=== NGOI XUONG ===")]
     [Tooltip("Hạ camera xuống bao nhiêu mét khi ngồi xem (0 = không ngồi)")]
@@ -44,6 +44,14 @@ public class KnockoutEvent : MonoBehaviour
 
     bool played;
 
+    /// Đang diễn cảnh bị đánh (không cho lưu game lúc này)
+    public static bool AnyRunning { get; private set; }
+
+    public string CaptureState() => played ? "1" : "0";
+    public void RestoreState(string s) => played = s == "1";
+
+    void OnDestroy() => AnyRunning = false;
+
     public void Play()
     {
         if (played) return;
@@ -53,6 +61,7 @@ public class KnockoutEvent : MonoBehaviour
 
     IEnumerator Run()
     {
+        AnyRunning = true;
         Camera cam = Camera.main;
         Transform camT = cam != null ? cam.transform : null;
         Vector3 camStart = camT != null ? camT.localPosition : Vector3.zero;
@@ -104,6 +113,7 @@ public class KnockoutEvent : MonoBehaviour
 
         if (wakeUpLines != null && wakeUpLines.Length > 0 && DialogueManager.Instance != null)
             DialogueManager.Instance.StartDialogue(wakeUpLines);
+        AnyRunning = false;
     }
 
     IEnumerator MoveCam(Transform t, Vector3 from, Vector3 to, float speed)

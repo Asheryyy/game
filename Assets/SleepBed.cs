@@ -10,7 +10,7 @@ using System.Collections;
 /// → đổi sang buổi sáng (On Wake Up: TimeOfDaySwitch.SetMorning) → sáng màn hình → nhân vật tự nói.
 /// Gắn vào object có Collider (Is Trigger) quanh giường.
 /// </summary>
-public class SleepBed : MonoBehaviour
+public class SleepBed : MonoBehaviour, ISaveable
 {
     [Header("=== DIEU KIEN ===")]
     [Tooltip("Chỉ ngủ được khi đang có quest này (vd: di_ngu). Để trống = lúc nào cũng ngủ được")]
@@ -44,6 +44,9 @@ public class SleepBed : MonoBehaviour
         if (col != null) col.isTrigger = true;
         if (captionText != null) captionText.gameObject.SetActive(false);
     }
+
+    public string CaptureState() => slept ? "1" : "0";
+    public void RestoreState(string s) => slept = s == "1";
 
     bool CanSleep() =>
         string.IsNullOrEmpty(requiredQuestId) ||

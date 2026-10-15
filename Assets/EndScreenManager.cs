@@ -129,6 +129,9 @@ public class EndScreenManager : MonoBehaviour
 
     private IEnumerator ShowEndScreen(string title, string body, Color titleColor, AudioClip music)
     {
+        // dọn UI trong game (ô nhiệm vụ, chữ "BẤM LIÊN TỤC [E]...") để không đè lên màn hình kết thúc
+        if (QuestUI.Instance != null) QuestUI.Instance.HideAll();
+        SaveSystem.DeleteSave(); // chơi xong → xóa save, lần sau "Tiếp tục" không vào lại đoạn cuối
         // Khoá input người chơi
         Time.timeScale   = 0f;
         Cursor.lockState = CursorLockMode.None;

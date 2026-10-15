@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// Xong hết → hoàn thành quest, nhân vật tự nói vài câu, bật object (vd: tờ giấy note).
 /// Gắn vào 1 GameObject trống; kéo nó vào ô Group của từng ChoreItem.
 /// </summary>
-public class ChoreGroup : MonoBehaviour
+public class ChoreGroup : MonoBehaviour, ISaveable
 {
     [Tooltip("Quest hoàn thành khi dọn xong hết (vd: don_dep)")]
     [SerializeField] private string questToComplete = "don_dep";
@@ -19,6 +19,9 @@ public class ChoreGroup : MonoBehaviour
 
     readonly List<ChoreItem> chores = new List<ChoreItem>();
     int doneCount;
+
+    public string CaptureState() => doneCount.ToString();
+    public void RestoreState(string s) => doneCount = int.Parse(s);
 
     public void Register(ChoreItem c) { if (!chores.Contains(c)) chores.Add(c); }
 

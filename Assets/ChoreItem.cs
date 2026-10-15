@@ -7,7 +7,7 @@ using System.Collections;
 /// Player đứng gần → GIỮ E trong vài giây → vết bẩn mờ dần rồi biến mất.
 /// Gắn vào object có Collider (Is Trigger) quanh chỗ bẩn. Thuộc 1 ChoreGroup.
 /// </summary>
-public class ChoreItem : MonoBehaviour
+public class ChoreItem : MonoBehaviour, ISaveable
 {
     [SerializeField] private ChoreGroup group;
     [SerializeField] private string choreName = "Quét bụi";
@@ -28,6 +28,10 @@ public class ChoreItem : MonoBehaviour
     [SerializeField] private AudioSource workSound;
 
     public bool IsDone { get; private set; }
+
+    /// Đang có việc dọn dẹp nào được giữ E không (để đồ cầm tay như cây chổi biết mà quét)
+    public static bool AnyWorking => working != null;
+    static ChoreItem working;
 
     bool playerNearby;
     float progress;
@@ -72,6 +76,7 @@ public class ChoreItem : MonoBehaviour
         if (Keyboard.current.eKey.isPressed)
         {
             if (progress == 0f && workSound != null) workSound.Play();
+            working = this;
             progress += Time.deltaTime;
             int pct = Mathf.Clamp(Mathf.RoundToInt(progress / holdTime * 100f), 0, 100);
             if (QuestUI.Instance != null) QuestUI.Instance.SetNotificationText($"Đang {choreName.ToLower()}... {pct}%");
@@ -84,11 +89,17 @@ public class ChoreItem : MonoBehaviour
         }
     }
 
+    public string CaptureState() => IsDone ? "1" : "0";
+    public void RestoreState(string s) => IsDone = s == "1";
+
+    void OnDisable() { if (working == this) working = null; }
+
     bool HasItem() => string.IsNullOrEmpty(requiredItemId) || ClueItem.HasFound(requiredItemId);
 
     void StopWork()
     {
         progress = 0f;
+        if (working == this) working = null;
         if (workSound != null) workSound.Stop();
     }
 
@@ -96,6 +107,7 @@ public class ChoreItem : MonoBehaviour
     {
         IsDone = true;
         playerNearby = false;
+        if (working == this) working = null;
         if (workSound != null) workSound.Stop();
         StartCoroutine(FadeOutThen());
     }

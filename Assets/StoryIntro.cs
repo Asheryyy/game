@@ -16,10 +16,12 @@ public class StoryIntro : MonoBehaviour
 
     IEnumerator Start()
     {
+        if (SaveSystem.IsLoading) yield break; // đang tải game đã lưu → bỏ đoạn mở đầu
         if (!string.IsNullOrEmpty(introCaption) && QuestUI.Instance != null)
             QuestUI.Instance.ShowNotification(introCaption);
 
         yield return new WaitForSeconds(startDelay);
+        if (SaveSystem.IsLoading) yield break;
 
         if (introLines != null && introLines.Length > 0)
             DialogueManager.Instance.StartDialogue(introLines);

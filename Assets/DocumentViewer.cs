@@ -22,16 +22,27 @@ public class DocumentViewer : MonoBehaviour
 
     public bool IsOpen { get; private set; }
 
+    TMP_FontAsset defaultFont;
+    Color defaultColor;
+
     void Awake()
     {
         Instance = this;
+        if (bodyText != null) { defaultFont = bodyText.font; defaultColor = bodyText.color; }
         if (panel != null) panel.SetActive(false);
     }
 
     /// Mở tờ giấy, chờ người chơi đọc xong bấm E (hoặc Esc) mới trả về
-    public IEnumerator Read(string title, string body)
+    public IEnumerator Read(string title, string body, TMP_FontAsset font = null, Color? color = null)
     {
         if (panel == null) yield break;
+
+        // font/màu riêng cho từng tờ (vd: chữ viết tay cho thư), không có thì dùng mặc định
+        if (bodyText != null)
+        {
+            bodyText.font = font != null ? font : defaultFont;
+            bodyText.color = color ?? defaultColor;
+        }
 
         if (titleText != null) { titleText.text = title; titleText.gameObject.SetActive(!string.IsNullOrEmpty(title)); }
         if (bodyText != null) bodyText.text = body;

@@ -31,6 +31,13 @@ public class QuestUI : MonoBehaviour
         questNotificationText.text = message;
         questNotificationPanel.SetActive(true);
     }
+    // Ẩn hết UI nhiệm vụ + thông báo (vd: lúc hiện màn hình kết thúc)
+    public void HideAll()
+    {
+        StopAllCoroutines();
+        questPanel.SetActive(false);
+        questNotificationPanel.SetActive(false);
+    }
     // Hàm nhận quest — thêm prefix
     public void ShowQuestNotification(string questName)
     {

@@ -28,6 +28,10 @@ public class ClueItem : MonoBehaviour
     [TextArea(4, 12)] [SerializeField] private string documentText;
     [Tooltip("Nhân vật nói TRƯỚC khi mở tờ giấy (vd: 'Tờ giấy kẹp sau ngăn kéo...'). Thoughts bên dưới = nói SAU khi đọc")]
     [SerializeField] private DialogueLine[] beforeReadLines;
+    [Tooltip("Font riêng cho tờ giấy này (vd: font viết tay). Để trống = font mặc định")]
+    [SerializeField] private TMPro.TMP_FontAsset documentFont;
+    [Tooltip("Màu chữ riêng (vd: xanh mực, đỏ). Alpha = 0 → dùng màu mặc định")]
+    [SerializeField] private Color documentColor = new Color(0, 0, 0, 0);
 
     [Header("=== SUY NGHI KHI TIM THAY ===")]
     [SerializeField] private DialogueLine[] thoughts;
@@ -45,6 +49,12 @@ public class ClueItem : MonoBehaviour
 
     static readonly HashSet<string> foundClues = new HashSet<string>();
     public static bool HasFound(string id) => foundClues.Contains(id);
+    public static IEnumerable<string> AllFound => foundClues;
+    public static void RestoreFound(IEnumerable<string> ids)
+    {
+        foundClues.Clear();
+        if (ids != null) foreach (string id in ids) foundClues.Add(id);
+    }
 
     bool playerNearby = false;
 
@@ -119,7 +129,8 @@ public class ClueItem : MonoBehaviour
             yield return null;
             while (DialogueManager.Instance.IsActive) yield return null;
         }
-        yield return DocumentViewer.Instance.Read(documentTitle, documentText);
+        yield return DocumentViewer.Instance.Read(documentTitle, documentText, documentFont,
+            documentColor.a > 0f ? documentColor : (Color?)null);
         OnFoundNow();
     }
 

@@ -12,6 +12,12 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject chapterPanel;
     [SerializeField] private GameObject settingsPanel;
 
+    [Header("=== TIEP TUC (SAVE) ===")]
+    [Tooltip("Nút Tiếp tục — tự mờ đi khi chưa có file save")]
+    [SerializeField] private Button continueButton;
+    [Tooltip("Chữ hiện thời gian lưu gần nhất (không bắt buộc)")]
+    [SerializeField] private TMP_Text continueInfoText;
+
     [Header("=== SCENES ===")]
     [SerializeField] private string[] chapterSceneNames = { "SampleScene", "Chapter2", "Chapter3" };
 
@@ -51,12 +57,32 @@ public class MainMenuManager : MonoBehaviour
         }
         LoadSettings();
         InitResolutions();
+        RefreshContinueButton();
         ShowPanel(mainPanel);
         if (bgmSource != null && !bgmSource.isPlaying) bgmSource.Play();
     }
 
     // MAIN PANEL
-    public void OnNewGameButton()        => StartCoroutine(LoadSceneCoroutine(chapterSceneNames[0]));
+    public void OnNewGameButton()
+    {
+        SaveSystem.LoadOnNextScene = false;
+        StartCoroutine(LoadSceneCoroutine(chapterSceneNames[0]));
+    }
+
+    public void OnContinueButton()
+    {
+        SaveData d = SaveSystem.ReadSave();
+        if (d == null || string.IsNullOrEmpty(d.scene)) { RefreshContinueButton(); return; }
+        SaveSystem.LoadOnNextScene = true;
+        StartCoroutine(LoadSceneCoroutine(d.scene));
+    }
+
+    void RefreshContinueButton()
+    {
+        SaveData d = SaveSystem.ReadSave();
+        if (continueButton != null) continueButton.interactable = d != null;
+        if (continueInfoText != null) continueInfoText.text = d != null ? "Lưu lúc " + d.savedAt : "";
+    }
     public void OnChapterSelectButton()  => ShowPanel(chapterPanel);
     public void OnSettingsButton()       => ShowPanel(settingsPanel);
     public void OnQuitButton()           => StartCoroutine(QuitCoroutine());

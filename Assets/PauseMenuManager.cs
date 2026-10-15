@@ -22,6 +22,9 @@ public class PauseMenuManager : MonoBehaviour
     [Tooltip("CanvasGroup của PausePanel để fade in/out (thêm component CanvasGroup vào PausePanel)")]
     [SerializeField] private CanvasGroup pauseCanvasGroup;
 
+    [Tooltip("Chữ báo kết quả lưu game hiện trong Pause Menu (không bắt buộc)")]
+    [SerializeField] private TMPro.TextMeshProUGUI saveStatusText;
+
     [Header("=== SCENE ===")]
     [Tooltip("Tên Scene Main Menu")]
     [SerializeField] private string mainMenuSceneName = "MainMenu";
@@ -87,6 +90,14 @@ public class PauseMenuManager : MonoBehaviour
         if (gameBGM != null) gameBGM.volume = originalVolume;
     }
 
+    /// <summary>Gán cho nút LƯU GAME</summary>
+    public void SaveGame()
+    {
+        string msg = SaveSystem.Save(out string reason) ? "Đã lưu game" : "Không lưu được: " + reason;
+        if (QuestUI.Instance != null) QuestUI.Instance.SetNotificationText(msg);
+        if (saveStatusText != null) saveStatusText.text = msg;
+    }
+
     /// <summary>Gán cho nút MAIN MENU</summary>
     public void GoToMainMenu()
     {
@@ -113,6 +124,7 @@ public class PauseMenuManager : MonoBehaviour
     private void PauseGame()
     {
         isPaused = true;
+        if (saveStatusText != null) saveStatusText.text = "";
 
         // Hiện panel
         pausePanel?.SetActive(true);

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// nhân vật nói, bật object (vd: cửa phòng trong), gọi event.
 /// Gắn vào 1 GameObject trống; kéo nó vào ô Group của từng ClueItem.
 /// </summary>
-public class ClueGroup : MonoBehaviour
+public class ClueGroup : MonoBehaviour, ISaveable
 {
     [SerializeField] private string questToComplete = "luc_soat_302";
     [Tooltip("Hiện tiến độ: 'Bằng chứng 1/3'")]
@@ -20,6 +20,14 @@ public class ClueGroup : MonoBehaviour
     readonly List<ClueItem> clues = new List<ClueItem>();
     int found;
     bool done;
+
+    public string CaptureState() => found + ";" + (done ? 1 : 0);
+    public void RestoreState(string s)
+    {
+        string[] p = s.Split(';');
+        found = int.Parse(p[0]);
+        done = p[1] == "1";
+    }
 
     public void Register(ClueItem c) { if (!clues.Contains(c)) clues.Add(c); }
 

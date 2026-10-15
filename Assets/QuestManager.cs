@@ -18,6 +18,7 @@ public class QuestManager : MonoBehaviour
         activeQuests.Add(quest);
         Debug.Log("StartQuest gọi: " + quest.questId);
         QuestUI.Instance.ShowQuestNotification(quest.questName);
+        SaveSystem.RequestAutoSave(); // checkpoint mỗi khi nhận nhiệm vụ mới
     }
     public void CompleteQuest(string id)
     {
@@ -32,6 +33,12 @@ public class QuestManager : MonoBehaviour
         q.isActive = false;
         QuestUI.Instance.ShowQuestComplete(q.questName);
         QuestUI.Instance.UpdateUI();
+    }
+    // Khôi phục danh sách nhiệm vụ từ file save
+    public void RestoreQuests(List<Quest> quests)
+    {
+        activeQuests.Clear();
+        if (quests != null) activeQuests.AddRange(quests);
     }
     public Quest GetQuest(string id)
     {

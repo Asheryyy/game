@@ -9,7 +9,7 @@ using System.Collections;
 /// Player lại gần + bấm E → gõ đáp lại → bên kia gõ trả lời → nhân vật nói, xong quest.
 /// Gắn vào object có Collider (Is Trigger) sát bức tường.
 /// </summary>
-public class KnockWall : MonoBehaviour
+public class KnockWall : MonoBehaviour, ISaveable
 {
     [Header("=== AM THANH ===")]
     [Tooltip("Tiếng gõ từ BÊN KIA tường: AudioSource 3D (Spatial Blend = 1) đặt sau tường, Output = SFX")]
@@ -36,6 +36,9 @@ public class KnockWall : MonoBehaviour
     [SerializeField] private UnityEvent onAnswered;
 
     bool playerNearby, answered, busy;
+
+    public string CaptureState() => answered ? "1" : "0";
+    public void RestoreState(string s) => answered = s == "1";
 
     void OnEnable() => StartCoroutine(SosLoop());
 
