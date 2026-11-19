@@ -1,0 +1,305 @@
+fileFormatVersion: 2
+guid: e3884646a3541fc43874a85c2a812fda
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LaCay_1_RGBA
+    second: {fileID: 2800000, guid: fd802170d0785084dac0a44e0405ff46, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LaCay_2_RGBA
+    second: {fileID: 2800000, guid: f8f0f9e0e6d911b44b2a9ccac7af1b30, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: LaCay_3_RGBA
+    second: {fileID: 2800000, guid: cc7489f3720f06a4bbd1dc7526e48f78, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TonKem_Dark_Diffuse
+    second: {fileID: 2800000, guid: 6fef5b196f20a0a4ea6ee9b901b9fa59, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_0_Diffuse
+    second: {fileID: 2800000, guid: 1c0dc5135e526e14ead9e64d6ae0137f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_1_Diffuse
+    second: {fileID: 2800000, guid: 8bfe7b0a2e6411b48b2c14ca74a8f170, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_2_Diffuse
+    second: {fileID: 2800000, guid: 6f53b1ee0b198a344a1c97e1fd864042, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_3_Diffuse
+    second: {fileID: 2800000, guid: d438b60e87cd34a43858eee5f1636f9d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_4_Diffuse
+    second: {fileID: 2800000, guid: e6eb89d750f8a294ba7450e57c2051a9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_5_Diffuse
+    second: {fileID: 2800000, guid: 6c496c12481f950478cc69da1681752b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongMoi_7_Diffuse
+    second: {fileID: 2800000, guid: 165751cfb555f614f967858355a5fd4e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_0_Diffuse_1k
+    second: {fileID: 2800000, guid: 1f47af9f320e8ed4f9ceaaf2cf5bd119, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_1_Diffuse_1k
+    second: {fileID: 2800000, guid: 3f36f8585c3e6f145bef11e967235240, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_2_Diffuse_1k
+    second: {fileID: 2800000, guid: fb848386877efb44789c94899e25ed91, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_3_Diffuse_1k
+    second: {fileID: 2800000, guid: 6c4bd19ba98841d4ca58c8dd34d3a425, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_4_Diffuse_1k
+    second: {fileID: 2800000, guid: 80bcf7e24bc9b014caf53370fca61b4e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_5_Diffuse_1k
+    second: {fileID: 2800000, guid: b0346e33ded4ed74e84c15d892ee319a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_6_Diffuse_1k
+    second: {fileID: 2800000, guid: 18e9c52926b7e5e4e88b619e79532717, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: TuongNha_7_Diffuse_1k
+    second: {fileID: 2800000, guid: a6d81e53250d67e4795b48c31f45bbc3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: VoCay_Dark_Diffuse
+    second: {fileID: 2800000, guid: 58700cae26cf96c4d98f025d9645d043, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: VoCay_nor_gl
+    second: {fileID: 2800000, guid: 8e28d22e19d3b8b4090fcf3053f27e7e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: asphalt_04_diff_2k
+    second: {fileID: 2800000, guid: 92f51d40a82984f4992af7d405f9988e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: clay_roof_tiles_02_Diffuse
+    second: {fileID: 2800000, guid: baf14bf5655d1dd46a7bf49e3fb1630e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: clay_roof_tiles_02_nor_gl
+    second: {fileID: 2800000, guid: 7a4f36e228362c140ab677a471ecb7d8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concrete_wall_003_nor_gl_1k
+    second: {fileID: 2800000, guid: f1f63ad22ef6df34186e42bd622be7fc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: corrugated_iron_nor_gl_1k
+    second: {fileID: 2800000, guid: bcc373f8bc63709488a282972add1794, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: cracked_concrete_02_diff_2k
+    second: {fileID: 2800000, guid: 6901836df43e3e3479a406a2f0537f58, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: interior_tiles_Diffuse
+    second: {fileID: 2800000, guid: 362338344ced4c0418facf3ebba4d1ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: interior_tiles_nor_gl
+    second: {fileID: 2800000, guid: 5357016a7ba432848b538e8f5831ed9a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: plastered_wall_05_Diffuse_1k
+    second: {fileID: 2800000, guid: b71884657cc174549997d00d1aa49815, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: plastered_wall_05_nor_gl_1k
+    second: {fileID: 2800000, guid: 73f15d3ed809ee94c92d877a0fb682e2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rounded_square_tiled_wall_Diffuse
+    second: {fileID: 2800000, guid: 9ecc7d0c46f27b743b7445998bd18615, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rounded_square_tiled_wall_nor_gl
+    second: {fileID: 2800000, guid: d35f938fc558b2048b2521a6f258c376, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rusty_corrugated_iron_Diffuse_1k
+    second: {fileID: 2800000, guid: 4deda4518c361f6448f8de3f300c8b42, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rusty_corrugated_iron_nor_gl_1k
+    second: {fileID: 2800000, guid: 505b31619e97c1c47a2be48c298cdf3d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rusty_metal_05_Diffuse_1k
+    second: {fileID: 2800000, guid: c8b9583f7a6df7e4caf8b48fe3ec1e3a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rusty_metal_05_nor_gl_1k
+    second: {fileID: 2800000, guid: 01d996297de780349b2dc91edc677d4d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rusty_painted_metal_Diffuse_1k
+    second: {fileID: 2800000, guid: 8c7b54d56fc600440b611bd3f25672b9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: rusty_painted_metal_nor_gl_1k
+    second: {fileID: 2800000, guid: 71bdfaed768ddad418f1aea1081e2fea, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

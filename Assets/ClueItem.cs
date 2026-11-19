@@ -50,6 +50,11 @@ public class ClueItem : MonoBehaviour
     static readonly HashSet<string> foundClues = new HashSet<string>();
     public static bool HasFound(string id) => foundClues.Contains(id);
     public static IEnumerable<string> AllFound => foundClues;
+    /// Ghi nhận manh mối không cần nhặt vật (vd: NPC kể chuyện khi giao hàng)
+    public static void MarkFound(string id) => foundClues.Add(id);
+    public static void ForgetFound(string id) => foundClues.Remove(id);
+    /// Gọi từ UnityEvent (vd: ChoiceEvent → On Chosen) để đánh dấu 1 manh mối/lựa chọn
+    public void GiveClue(string id) => MarkFound(id);
     public static void RestoreFound(IEnumerable<string> ids)
     {
         foundClues.Clear();

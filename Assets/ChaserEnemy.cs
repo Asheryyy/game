@@ -19,6 +19,8 @@ public class ChaserEnemy : MonoBehaviour
     [SerializeField] private float catchDistance = 1.2f;
     [Tooltip("Player ở xa hơn khoảng này (vd: đã trèo ra ban công) = bỏ cuộc, đứng yên")]
     [SerializeField] private float giveUpDistance = 40f;
+    [Tooltip("Đứng yên tới khi Player nhận quest này (vd: câu cuối thoại chặn đường giao quest) rồi mới đuổi. Để trống = đuổi luôn")]
+    [SerializeField] private string startAfterQuestId;
 
     [Header("=== KHI XUAT HIEN ===")]
     [Tooltip("Câu hét khi phát hiện Player (hiện ở ô thông báo, không dừng game)")]
@@ -45,6 +47,10 @@ public class ChaserEnemy : MonoBehaviour
     [SerializeField] private float camShake = 0.12f;
 
     [Header("=== BI BAT ===")]
+    [Tooltip("Trigger trong Animator bật lúc bắt kịp (vd: Danh) — để trống = không dùng")]
+    [SerializeField] private string animCatchTrigger = "Danh";
+    [Tooltip("Chờ bao lâu sau khi bắt kịp mới gọi On Caught (giây) — cho kịp diễn cảnh đánh")]
+    [SerializeField] private float caughtDelay = 0f;
     [SerializeField] private UnityEvent onCaught;
 
     [Header("=== CHONG TRA (cần có dao) ===")]
@@ -79,6 +85,9 @@ public class ChaserEnemy : MonoBehaviour
     {
         // chờ thoại (vd: cô gái "Chúng nó sắp về rồi!") xong mới tới cảnh đạp cửa
         yield return null;
+        while (!string.IsNullOrEmpty(startAfterQuestId) &&
+               !(QuestManager.Instance != null && QuestManager.Instance.GetQuest(startAfterQuestId) != null))
+            yield return null;
         while (DialogueManager.Instance != null && DialogueManager.Instance.IsActive) yield return null;
 
         // 1. Đạp cửa
@@ -143,7 +152,12 @@ public class ChaserEnemy : MonoBehaviour
         {
             caught = true;
             Stop();
-            onCaught?.Invoke();
+            Vector3 face = Flat(player.position - transform.position);
+            if (face.sqrMagnitude > 0.001f) transform.rotation = Quaternion.LookRotation(face);
+            if (anim != null && !string.IsNullOrEmpty(animCatchTrigger))
+                foreach (AnimatorControllerParameter p in anim.parameters)
+                    if (p.name == animCatchTrigger && p.type == AnimatorControllerParameterType.Trigger) anim.SetTrigger(animCatchTrigger);
+            StartCoroutine(InvokeCaught());
             return;
         }
 
@@ -190,6 +204,12 @@ public class ChaserEnemy : MonoBehaviour
 
         if (presses >= pressesNeeded) onWinFight?.Invoke();
         else onCaught?.Invoke();
+    }
+
+    IEnumerator InvokeCaught()
+    {
+        if (caughtDelay > 0f) yield return new WaitForSeconds(caughtDelay);
+        onCaught?.Invoke();
     }
 
     static Vector3 Flat(Vector3 v) => new Vector3(v.x, 0f, v.z);

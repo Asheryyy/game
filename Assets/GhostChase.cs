@@ -48,6 +48,8 @@ public class GhostChase : MonoBehaviour, ISaveable
     bool patrolActive  = false;
     bool hasDashed     = false;
     bool isDashing     = false;
+    bool scareDone     = false; // hù 1 lần: ma đã tới B → không phát nhạc lại
+    bool musicStarted  = false; // đã Play trong lần Player vào vùng này chưa
     int  currentWaypoint = 0;
 
     void Start()
@@ -109,6 +111,7 @@ public class GhostChase : MonoBehaviour, ISaveable
                 if (Vector3.Distance(transform.position, waypointB.position) < 0.2f)
                 {
                     isDashing = false;
+                    scareDone = true;
                     Debug.Log("[Ghost] Đã tới B, dừng lại.");
                     if (!hasReacted && reactionLines != null && reactionLines.Length > 0)
                     {
@@ -172,11 +175,22 @@ public class GhostChase : MonoBehaviour, ISaveable
     {
         if (tenseMusicSource == null) return;
 
-        if (playerNear)
+        if (!playerNear) musicStarted = false;
+
+        // Hù 1 lần: ma tới B rồi → fade tắt luôn, không để clip chạy hết
+        if (playerNear && (loopPatrol || !scareDone))
         {
-            if (!tenseMusicSource.isPlaying) tenseMusicSource.Play();
-            tenseMusicSource.volume = Mathf.MoveTowards(
-                tenseMusicSource.volume, maxVolume, fadeSpeed * Time.deltaTime);
+            // Chỉ Play 1 lần mỗi lượt vào vùng — clip hết thì thôi, không phát lại liên tục.
+            if (!musicStarted)
+            {
+                musicStarted = true;
+                // Hù 1 lần: to ngay lập tức (ma lướt quá nhanh, fade in sẽ không kịp nghe)
+                tenseMusicSource.volume = loopPatrol ? 0f : maxVolume;
+                tenseMusicSource.Play();
+            }
+            if (tenseMusicSource.isPlaying)
+                tenseMusicSource.volume = Mathf.MoveTowards(
+                    tenseMusicSource.volume, maxVolume, fadeSpeed * Time.deltaTime);
         }
         else
         {

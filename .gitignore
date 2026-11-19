@@ -64,3 +64,9 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+# File Blender gốc (quá 100 MB, Unity không dùng — chỉ cần .fbx đã export)
+*.blend
+*.blend1
+# Scene Unity tự khôi phục sau khi crash
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta

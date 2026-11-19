@@ -57,7 +57,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(DialogueManager.Instance.IsActive) return;
+        if(DialogueManager.Instance.IsActive || ChoiceEvent.IsOpen) return;
         // Đang bị dịch chuyển (CharacterController tạm tắt) → đứng yên
         if(!controller.enabled) return;
         // Block input khi đang pause

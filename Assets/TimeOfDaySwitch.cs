@@ -36,6 +36,9 @@ public class TimeOfDaySwitch : MonoBehaviour
     [SerializeField] private Material nightSkybox;
     [Tooltip("Các object chỉ có ban đêm (kéo Rain vào đây)")]
     [SerializeField] private GameObject[] nightObjects;
+    [Tooltip("Object chỉ bật vào ĐÊM ĐẦU (vd: Rain). Quest bên dưới hoàn thành rồi thì đêm nào cũng tắt")]
+    [SerializeField] private GameObject[] firstNightObjects;
+    [SerializeField] private string firstNightEndsAfterQuest = "di_ngu";
 
     public static TimeOfDaySwitch Instance { get; private set; }
     public bool IsNight { get; private set; }
@@ -67,6 +70,12 @@ public class TimeOfDaySwitch : MonoBehaviour
         Apply(true, nightSunRotation, nightSunColor, nightSunIntensity, nightAmbient, nightSkybox);
     }
 
+    // Cửa vào chung cư: chỉ chiều → đêm (ngày 1). Sáng ngày 2 đi giao hàng qua cửa không bị tối
+    public void SetNightIfAfternoon()
+    {
+        if (Current == Mode.Afternoon) SetNight();
+    }
+
     public void SetMorning()
     {
         Current = Mode.Morning;
@@ -92,5 +101,7 @@ public class TimeOfDaySwitch : MonoBehaviour
 
         foreach (GameObject go in afternoonObjects) if (go != null) go.SetActive(!night);
         foreach (GameObject go in nightObjects)     if (go != null) go.SetActive(night);
+        bool firstNight = night && (QuestManager.Instance == null || !QuestManager.Instance.IsCompleted(firstNightEndsAfterQuest));
+        foreach (GameObject go in firstNightObjects) if (go != null) go.SetActive(firstNight);
     }
 }

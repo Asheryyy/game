@@ -22,6 +22,8 @@ public class DarkZone : MonoBehaviour
     [SerializeField] private float fadeDuration = 1f;
     [Tooltip("TRUE = chỉ tối khi đang là ban đêm (TimeOfDaySwitch). Ban ngày đi qua bình thường")]
     [SerializeField] private bool onlyAtNight = true;
+    [Tooltip("TRUE = chỉ tối LẦN ĐẦU (lúc con ma hù). Ra khỏi vùng là tự tắt luôn, lần sau đi qua bình thường")]
+    [SerializeField] private bool onlyFirstTime = false;
 
     // lưu cài đặt gốc để trả lại khi ra
     bool savedFog; Color savedFogColor; FogMode savedFogMode;
@@ -30,10 +32,21 @@ public class DarkZone : MonoBehaviour
     Camera cam;
     Coroutine fading;
     bool inside;
+    Collider zone;
+    Transform player;
 
     void Awake()
     {
-        GetComponent<Collider>().isTrigger = true;
+        zone = GetComponent<Collider>();
+        zone.isTrigger = true;
+    }
+
+    // Teleport tắt CharacterController → Unity KHÔNG gọi OnTriggerExit → tự kiểm tra đã ra khỏi vùng chưa
+    void Update()
+    {
+        if (inside && player != null &&
+            Vector3.Distance(zone.ClosestPoint(player.position), player.position) > 1f)
+            Leave();
     }
 
     void Start() => cam = Camera.main;
@@ -56,6 +69,7 @@ public class DarkZone : MonoBehaviour
         // lưu lúc bước vào (không phải lúc Start) vì trời có thể đã đổi chiều → đêm
         if (fading == null) SaveSettings();
         inside = true;
+        player = other.transform;
         RenderSettings.fog = true;
         RenderSettings.fogMode = FogMode.Linear;
         // trời (skybox) không bị sương che → đổi nền camera sang đen
@@ -65,7 +79,12 @@ public class DarkZone : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Player") || !inside) return;
+        if (other.CompareTag("Player")) Leave();
+    }
+
+    void Leave()
+    {
+        if (!inside) return;
         inside = false;
         StartFade(savedFogColor, savedStart, Mathf.Max(savedEnd, 300f), savedAmbient, () =>
         {
@@ -74,6 +93,10 @@ public class DarkZone : MonoBehaviour
             RenderSettings.fogStartDistance = savedStart;
             RenderSettings.fogEndDistance = savedEnd;
             if (cam != null) { cam.clearFlags = savedClear; cam.backgroundColor = savedBg; }
+            // trời có thể đã đổi (đêm → sáng) trong lúc ở trong → lấy lại ánh sáng của buổi hiện tại, không dùng ambient cũ
+            if (TimeOfDaySwitch.Instance != null) TimeOfDaySwitch.Instance.SetMode((int)TimeOfDaySwitch.Instance.Current);
+            // tắt sau khi đã trả ánh sáng; SaveSystem lưu trạng thái tắt nên load lại vẫn không tối
+            if (onlyFirstTime) gameObject.SetActive(false);
         });
     }
 

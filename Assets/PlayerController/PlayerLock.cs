@@ -22,7 +22,7 @@ public class PlayerLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(DialogueManager.Instance.IsActive) return;
+        if(DialogueManager.Instance.IsActive || ChoiceEvent.IsOpen) return;
         Vector2 val = m_Player.Look.ReadValue<Vector2>();
         xRotation += val.y*sens;
         xRotation = Mathf.Clamp(xRotation,-90,90);

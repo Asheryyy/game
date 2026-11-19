@@ -16,7 +16,7 @@ public interface ISaveable
 [Serializable]
 public class SaveData
 {
-    public string scene;
+    public string scene;        
     public string savedAt;
     public Vector3 playerPos;
     public float playerYaw;
@@ -52,7 +52,7 @@ public class SaveSystem : MonoBehaviour
     {
         try { return HasSave ? JsonUtility.FromJson<SaveData>(File.ReadAllText(FilePath)) : null; }
         catch (Exception e) { Debug.LogWarning("[Save] Không đọc được file save: " + e.Message); return null; }
-    }
+    }                                           
 
     public static void DeleteSave()
     {
@@ -98,7 +98,7 @@ public class SaveSystem : MonoBehaviour
         if (QuestManager.Instance == null) { reason = "Không có gì để lưu ở đây"; return false; }
         if (DialogueManager.Instance != null && DialogueManager.Instance.IsActive) { reason = "Đang hội thoại"; return false; }
         if (DocumentViewer.Instance != null && DocumentViewer.Instance.IsOpen) { reason = "Đang đọc giấy tờ"; return false; }
-        if (KnockoutEvent.AnyRunning) { reason = "Không thể lưu lúc này"; return false; }
+        if (KnockoutEvent.AnyRunning || ChoiceEvent.IsOpen) { reason = "Không thể lưu lúc này"; return false; }
         foreach (ChaserEnemy c in FindObjectsByType<ChaserEnemy>(FindObjectsSortMode.None))
             if (c.isActiveAndEnabled) { reason = "Không thể lưu khi đang bị truy đuổi!"; return false; }
         return true;
