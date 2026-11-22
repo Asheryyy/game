@@ -110,7 +110,8 @@ BlenderSource/         File nguồn export từ Blender (.fbx, texture). Unity k
 <summary><b>⚠️ Spoiler: các kết thúc</b></summary>
 
 - **Bad End:** tin nhầm người, hoặc bị bọn giang hồ bắt lại.
-- **Good End – Khống chế:** đem theo con dao tìm được trong phòng 302 và đánh thắng tên giang hồ.
+- **Bad End – Khống chế:** đem theo con dao tìm được trong phòng 302 và đánh thắng tên giang hồ. Tuy nhiên người bình thường sẽ không chống lại được sức mạnh của giang hồ và nằm xuống.
+- **Bad End - Ngày 3 không chạy về được chung cư hoặc chạy sai đường -> bị bắt.
 - **Good End – "Im lặng là vàng":** để ý những mảnh giấy người lạ để lại sau khi bạn bị đánh ngất, và chọn **tin tưởng** người đó.
 
 </details>
