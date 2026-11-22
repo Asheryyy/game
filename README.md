@@ -4,7 +4,7 @@ Game 3D góc nhìn thứ nhất thể loại **kinh dị + trinh thám**, bối 
 
 - Engine: **Unity 6 (6000.2.7f2)**, Universal Render Pipeline
 - Ngôn ngữ trong game: tiếng Việt
-- Có **3 kết thúc** (1 Bad End, 2 Good End)
+- Có **4 kết thúc** (3 Bad End, 1 Good End)
 
 ---
 
