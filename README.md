@@ -1,4 +1,4 @@
-# Chung cư cũ – Tòa B
+# Bí ẩn ở căn phòng số 3
 
 Game 3D góc nhìn thứ nhất thể loại **kinh dị + trinh thám**, bối cảnh một khu chung cư cũ ở Việt Nam. Bạn vào vai một người trẻ vừa ra trường, thuê phòng 303 tòa B. Tiền nước cao bất thường, có tiếng gõ tường lúc nửa đêm, có bóng ma ngoài hành lang, và phòng 302 bên cạnh được cho là bỏ hoang… Hãy tìm ra sự thật.
 
